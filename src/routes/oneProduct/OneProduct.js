@@ -60,7 +60,7 @@ class OneProduct extends Component {
               <h3>Rs. {oneProduct.itemPrice} /-</h3>
               <p>{oneProduct.itemDescription}</p>
               <button>
-                <a href={oneProduct.buyLink} target="_blank" rel="noreferrer">Buy on Flipkart</a>
+                <a href={oneProduct.buyLink} target="_blank" rel="noreferrer">Buy on {oneProduct.platform || `Flipkart`}</a>
               </button>
             </div>
           </div>

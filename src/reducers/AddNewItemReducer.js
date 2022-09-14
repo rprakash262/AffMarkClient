@@ -28,6 +28,7 @@ const SET_ITEM_PRICE = 'addNewItem/SET_ITEM_PRICE';
 const SET_ITEM_DISCOUNT = 'addNewItem/SET_ITEM_DISCOUNT';
 const SET_ITEM_BEST_OFFER = 'addNewItem/SET_ITEM_BEST_OFFER';
 const SET_ITEM_FEATURED = 'addNewItem/SET_ITEM_FEATURED';
+const SELECT_PLATFORM = 'addNewItem/SELECT_PLATFORM';
 const SET_CUSTOMER_RATING = 'addNewItem/SET_CUSTOMER_RATING';
 const SET_ITEM_DESC = 'addNewItem/SET_ITEM_DESC';
 const SET_ITEM_BUY_LINK = 'addNewItem/SET_ITEM_BUY_LINK';
@@ -48,6 +49,7 @@ const setSubmitting = bool => ({ type: SET_SUBMITTING_FLAG, bool });
 const setItemName = name => ({ type: SET_ITEM_NAME, name });
 const setItemPrice = price => ({ type: SET_ITEM_PRICE, price });
 const setItemDesc = desc => ({ type: SET_ITEM_DESC, desc });
+const selectPlatform = platform => ({ type: SELECT_PLATFORM, platform });
 const setCustomerRating = rating => ({ type: SET_CUSTOMER_RATING, rating });
 const setItemFeatured = bool => ({ type: SET_ITEM_FEATURED, bool });
 const setItemBuyLink = link => ({ type: SET_ITEM_BUY_LINK, link });
@@ -75,6 +77,7 @@ const defaultState = {
   deletingItemFlag: false,
   loadingEditItemModal: false,
   editingItemId: '',
+  platform: 'Flipkart'
 };
 
 const init = () => (dispatch, getState) => {
@@ -146,6 +149,7 @@ const submitNewItem = () => async (dispatch, getState) => {
     isFeatured,
     customerRating,
     buyLink,
+    platform,
   } = getState().addNewItem;
 
   let newItemFormData = {};
@@ -158,6 +162,7 @@ const submitNewItem = () => async (dispatch, getState) => {
   newItemFormData['isFeatured'] = isFeatured;
   newItemFormData['buyLink'] = buyLink;
   newItemFormData['customerRating'] = customerRating;
+  newItemFormData['platform'] = platform;
   newItemFormData['itemImage'] = imageUrls;
   newItemFormData['date'] = new Date();
 
@@ -195,6 +200,7 @@ const submitNewItem = () => async (dispatch, getState) => {
     dispatch(setItemPrice(''));
     dispatch(setItemBuyLink(''));
     dispatch(setImageUrls([]));
+    dispatch(selectPlatform('Flipkart'))
     dispatch(setCustomerRating(0));
     dispatch(setItemFeatured(false));
     dispatch(setSubmitting(false));
@@ -378,6 +384,7 @@ export const ACTIONS = {
   setItemName,
   setItemPrice,
   setItemDesc,
+  selectPlatform,
   setItemFeatured,
   setCustomerRating,
   setItemBuyLink,
@@ -447,6 +454,10 @@ function AddNewItemReducer(state = defaultState, action) {
     case SET_ITEM_FEATURED:
       return Object.assign({}, state, {
         isFeatured: action.bool,
+      });
+    case SELECT_PLATFORM:
+      return Object.assign({}, state, {
+        platform: action.platform,
       });
     case SET_ITEM_BUY_LINK:
       return Object.assign({}, state, {

@@ -12,6 +12,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
 import Button from '@material-ui/core/Button';
 
 import { ACTIONS } from '../../reducers/AddNewItemReducer';
@@ -62,6 +65,7 @@ class AddNewItem extends Component {
       itemPrice,
       itemDescription,
       buyLink,
+      platform,
       isFeatured,
       setItemName,
       setItemPrice,
@@ -72,6 +76,7 @@ class AddNewItem extends Component {
       setItemFeatured,
       selectedCategoryId,
       selectCategory,
+      selectPlatform,
       subcategoriesForCategory,
       selectSubCategory,
       selectedSubCategoryId,
@@ -166,16 +171,29 @@ class AddNewItem extends Component {
           </div>
           <div className="admin-one-form-item">
             <FormControlLabel
-              label="Is Featured"
+              label="Featured"
               control = { <Checkbox
                 value={isFeatured}
                 className="one-form-field"
-                label="isFeatured"
+                label="Featured"
                 variant="outlined"
                 checked={isFeatured}
                 onChange={() => setItemFeatured(!isFeatured)}
               /> }
             />
+          </div>
+          <div className="admin-one-form-item">
+            <FormLabel id="demo-radio-buttons-group-label">Platform</FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              // defaultValue="Flipkart"
+              name="radio-buttons-group"
+              value={platform}
+              onChange={e => selectPlatform(e.target.value)}
+            >
+              <FormControlLabel value="Flipkart" control={<Radio />} label="Flipkart" />
+              <FormControlLabel value="Amazon" control={<Radio />} label="Amazon" />
+            </RadioGroup>
           </div>
           <div className="admin-one-form-item">
             <TextField
@@ -264,6 +282,7 @@ const mapState = state => {
     imageFormData,
     itemName,
     itemPrice,
+    platform,
     itemDescription,
     isFeatured,
     buyLink,
@@ -282,6 +301,7 @@ const mapState = state => {
     imageFormData,
     itemName,
     itemPrice,
+    platform,
     itemDescription,
     isFeatured,
     buyLink,
@@ -301,6 +321,7 @@ const mapDispatch = {
   setItemPrice: ACTIONS.setItemPrice,
   setItemDesc: ACTIONS.setItemDesc,
   setItemBuyLink: ACTIONS.setItemBuyLink,
+  selectPlatform: ACTIONS.selectPlatform,
   setCustomerRating: ACTIONS.setCustomerRating,
   submitNewItem: ACTIONS.submitNewItem,
   submitEditNewItem: ACTIONS.submitEditNewItem,
