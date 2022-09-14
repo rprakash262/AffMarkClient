@@ -12,7 +12,7 @@ function Banner({changeSearchText, startSearch}) {
     <div className="banner">
       <div className="banner-container">
         <div className="banner-left">
-          <a href="http://localhost:3000">
+          <a href="/">
             <img alt="bag" src={bag} />
           </a>
           <h1>Shop</h1>
