@@ -28,12 +28,27 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      left: '-300px'
+      left: '-300px',
+      display: 'none'
     }
   }
 
   componentDidMount() {
     this.props.init();
+  }
+
+  openSidebar = () => {
+    this.setState({
+      left: 0,
+      display: 'block'
+    })
+  }
+
+  closeSidebar = () => {
+    this.setState({
+      left: '-300px',
+      display: 'none'
+    })
   }
 
   render() {
@@ -48,18 +63,31 @@ class App extends Component {
       hideConfirmDeleteItemPrompt,
       changeSearchText,
       startSearch,
+      loggedIn,
+      innerWidth,
+      innerHeight,
     } = this.props;
 
-    const { left } = this.state;
+    const { left, display } = this.state;
 
     return (
       <div className="layout">
         <div className="layout-top">
-          <Banner changeSearchText={changeSearchText} startSearch={startSearch} />
-          <Navbar left={left} closeSidebar={() => this.setState({ left: '-300px' })} />
-          <div className="burger-nav" onClick={() => this.setState({ left: '0' })}>
+          <div className="burger-nav" onClick={this.openSidebar}>
             <MenuIcon style={{ color: '#fff' }} />
           </div>
+          <Banner
+            changeSearchText={changeSearchText}
+            startSearch={startSearch}
+            loggedIn={loggedIn}
+          />
+          <Navbar
+            left={left}
+            display={display}
+            closeSidebar={this.closeSidebar}
+            innerWidth={innerWidth}
+            innerHeight={innerHeight}
+          />
         </div>
         <div className="layout-bottom">
           <Scrollable>
@@ -137,6 +165,9 @@ const mapState = state => {
     alertMsg,
     editItemModal,
     confirmDeleteItemPrompt,
+    loggedIn,
+    innerWidth,
+    innerHeight,
   } = state.layout;
 
   return {
@@ -145,6 +176,9 @@ const mapState = state => {
     alertMsg,
     editItemModal,
     confirmDeleteItemPrompt,
+    loggedIn,
+    innerWidth,
+    innerHeight,
   }
 }
 

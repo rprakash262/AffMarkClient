@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiRootTesting = 'https://glacial-fortress-06174.herokuapp.com';
+const apiRootTesting = 'https://glacial-fortress-06174.herokuapp.com/admin';
 
 export const addNewCategory = async (categoryName) => {
   const response = await axios.post(`${apiRootTesting}/add-new-category`, {

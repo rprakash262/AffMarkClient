@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import './Banner.css';
 import bag from './bag.png';
 
-function Banner({changeSearchText, startSearch}) {
+function Banner({changeSearchText, startSearch, loggedIn}) {
   const redirect = () => {
     window.location.href = '/admin'
   }
@@ -24,12 +24,15 @@ function Banner({changeSearchText, startSearch}) {
             onChange={(e) => changeSearchText(e.target.value)}
             onKeyPress={e => startSearch(e)}
           />
-          <div className="admin-button">
-            <Avatar
-              sx={{ bgcolor: 'white' }}
-              onClick={redirect}
-            >A</Avatar>
-          </div>
+        {/* <button onClick={() => localStorage.removeItem('loggedIn')}>sbh</button> */}
+          {loggedIn && (
+            <div className="admin-button">
+              <Avatar
+                sx={{ bgcolor: 'white' }}
+                onClick={redirect}
+              >A</Avatar>
+            </div>
+          )}
         </div>
       </div>
     </div>

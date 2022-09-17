@@ -12,6 +12,8 @@ const CHANGE_SEARCH_TEXT = 'LayoutReducer/CHANGE_SEARCH_TEXT';
 const CHANGE_SEARCH_FLAG = 'LayoutReducer/CHANGE_SEARCH_FLAG';
 const SET_CAT_OBJ = 'LayoutReducer/SET_CAT_OBJ';
 const SET_SUB_CAT_OBJ = 'LayoutReducer/SET_SUB_CAT_OBJ';
+const SET_LOGGED_IN = 'LayoutReducer/SET_LOGGED_IN';
+const SET_DIMENSIONS = 'LayoutReducer/SET_DIMENSIONS';
 
 const setNavbar = navbar => ({ type: SET_NAVBAR, navbar });
 const toggleEditItemModal = bool => ({ type: TOGGLE_EDIT_ITEM_MODAL, bool });
@@ -19,6 +21,8 @@ const toggleConfirmDeleteItemPrompt = bool => ({ type: TOGGLE_CONFIRM_DELETE_ITE
 const changeSearchText = val => ({ type: CHANGE_SEARCH_TEXT, val });
 const setCatObj = obj => ({ type: SET_CAT_OBJ, obj });
 const setSubCatObj = obj => ({ type: SET_SUB_CAT_OBJ, obj });
+const setLoggedIn = bool => ({ type: SET_LOGGED_IN, bool });
+const setDimensions = (width, height) => ({ type: SET_DIMENSIONS, width, height });
 
 const defaultState = {
   editItemModal: false,
@@ -30,11 +34,20 @@ const defaultState = {
   searchText: '',
   searchFlag: false,
   catObj: {},
-  subCatObj: {}
+  subCatObj: {},
+  loggedIn: false,
+  innerWidth: 0,
+  innerHeight: 0,
 };
 
 const init = () => async dispatch => {
   try {
+    const loggedIn = await localStorage.getItem('loggedIn');
+
+    if (loggedIn) {
+      dispatch(setLoggedIn(true));
+    }
+
     const response = await fetchNavbar();
     const categories = await getCategories();
     const subCategories = await getSubCategories();
@@ -54,8 +67,9 @@ const init = () => async dispatch => {
 
 
     dispatch(setNavbar(result));
-    dispatch(setCatObj(catObj))
-    dispatch(setSubCatObj(subCatObj))
+    dispatch(setCatObj(catObj));
+    dispatch(setSubCatObj(subCatObj));
+    dispatch(setDimensions(window.innerWidth, window.innerHeight));
   } catch (err) {
     console.log(err);
   }
@@ -118,6 +132,15 @@ function LayoutReducer(state = defaultState, action) {
     case SET_SUB_CAT_OBJ:
       return Object.assign({}, state, {
         subCatObj: action.obj
+      });
+    case SET_LOGGED_IN:
+      return Object.assign({}, state, {
+        loggedIn: action.bool,
+      });
+    case SET_DIMENSIONS:
+      return Object.assign({}, state, {
+        innerWidth: action.width,
+        innerHeight: action.height,
       });
     default:
       return state;

@@ -10,6 +10,7 @@ class Navbar extends Component {
     super();
     this.state = {
       left: 0,
+      showingItemId: ''
     }
   }
 
@@ -21,53 +22,80 @@ class Navbar extends Component {
     window.location.href = `/category/subCategory?id=${id}`;
   }
 
-  closeSidebar = () => {
-    this.props.closeSidebar();
-  }
+  slideDown = id => {
+    const { idd } = this.state;
 
-  openSidebar = () => {
-    this.setState({ left: 0 })
+    this.setState({ showingItemId: idd ? '' : id });
   }
 
   render() {
-    const { navbar, left, closeSidebar } = this.props;
+    const {
+      navbar,
+      left,
+      display,
+      closeSidebar,
+      innerWidth,
+      innerHeight,
+    } = this.props;
+
+    console.log({navbar})
+
+    const { showingItemId } = this.state;
 
     return (
-      <div className="navbar" style={{ left }}>
-        <div className="navbar-container">
-          {Object.entries(navbar).map(([key, val]) => (
-            <div className="one-nav-item">
-              <div className="one-nav-item-name">
-                {key.toUpperCase()} <ArrowDropDownIcon style={{ fontSize: '20px' }} />
-              </div>
-              <div className="one-nav-item-dropdown">
-                {val.map(v => 
-                  <div onClick={() => this.redirectHandler2(v.id)}>{v.subCategoryName}</div>
-                )}
-                <div onClick={() => this.redirectHandler(val[0].categoryId)}>See All</div>
-              </div>
+      <React.Fragment>
+        {innerWidth > 600 && (
+          <div className="navbar">
+            <div className="navbar-container">
+              {Object.entries(navbar).map(([key, val]) => (
+                <div className="one-nav-item">
+                  <div className="one-nav-item-name">
+                    {key.toUpperCase()} <ArrowDropDownIcon style={{ fontSize: '20px' }} />
+                  </div>
+                  <div className="one-nav-item-dropdown">
+                    {val.map(v => 
+                      <div onClick={() => this.redirectHandler2(v.id)}>{v.subCategoryName}</div>
+                    )}
+                    <div onClick={() => this.redirectHandler(val[0].categoryId)}>See All</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="navbar-container-mobile">
-          <div className="close-navbar-btn" onClick={this.closeSidebar}>
-            <ArrowBackIosIcon style={{ color: '#fff' }} />
           </div>
-          {Object.entries(navbar).map(([key, val]) => (
-            <div className="one-nav-item">
-              <div className="one-nav-item-name">
-                {key.toUpperCase()} <ArrowDropDownIcon style={{ fontSize: '20px' }} />
+        )}
+        {innerWidth <= 600 && (
+          <React.Fragment>
+            <div className="navbar-overlay" style={{ display }} onClick={closeSidebar} />
+            <div className="navbar-container-mobile" style={{ left }}>
+              <div className="close-navbar-btn" onClick={closeSidebar}>
+                <ArrowBackIosIcon style={{ color: '#fff' }} />
               </div>
-              <div className="one-nav-item-dropdown">
-                {val.map(v => 
-                  <div onClick={() => this.redirectHandler2(v.id)}>{v.subCategoryName}</div>
-                )}
-                <div onClick={() => this.redirectHandler(val[0].categoryId)}>See All</div>
-              </div>
+              {Object.entries(navbar).map(([key, val]) => (
+                <div className="one-nav-item-mobile">
+                  <div
+                    className="one-nav-item-name-mobile"
+                    onClick={() => this.slideDown(val[0].categoryId)}
+                  >
+                    {key.toUpperCase()} <ArrowDropDownIcon style={{ fontSize: '20px' }} />
+                  </div>
+                  <div
+                    className="one-nav-item-dropdown-mobile"
+                    style={{
+                      height: showingItemId === val[0].categoryId ? 'auto' : 0,
+                      overflow: showingItemId === val[0].categoryId ? 'unset' : 'hidden'
+                    }}
+                  >
+                    {val.map(v => 
+                      <div onClick={() => this.redirectHandler2(v.id)}>{v.subCategoryName}</div>
+                    )}
+                    <div onClick={() => this.redirectHandler(val[0].categoryId)}>See All</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </React.Fragment>
+        )}
+      </React.Fragment>
     )
   }
 }

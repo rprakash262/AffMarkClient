@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiRootTesting = 'https://glacial-fortress-06174.herokuapp.com';
+const apiRootTesting = 'https://glacial-fortress-06174.herokuapp.com/main';
 
 export const fetchHomePageContent = async () => {
   const response = await axios.get(`${apiRootTesting}/home-page-content`);

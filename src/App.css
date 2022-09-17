@@ -19,6 +19,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .layout-top {
@@ -71,42 +72,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .layout {
-    position: relative;
-  }
-
-  .layout-top {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #ed143d;
-    height: 100% !important;
-    width: 300px !important;
-    z-index: 2;
-    transition: left 0.5s ease-in-out;
-  }
-
-  .close-navbar-btn {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 0;
-    left: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .navbar-container-mobile {
-    display: flex;
-    flex-direction: column;
-  }
-
   .burger-nav {
     background-color: #ed143d;
     width: 50px;
@@ -114,5 +79,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
   }
 }
