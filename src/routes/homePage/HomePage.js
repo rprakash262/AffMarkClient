@@ -89,7 +89,7 @@ class HomePage extends Component {
                 loggedIn={loggedIn}
                 editItem={editItem}
                 deleteItem={deleteItem}
-                oneItem={(item) => <OneItem item={item} />}
+                oneItem={(item) => <OneItem item={item} loggedIn={loggedIn} editItem={editItem} deleteItem={deleteItem} />}
               />
             </div>
           </div>

@@ -51,7 +51,8 @@ const submitSecurityKey = () => async (dispatch, getState) => {
 
   if (securityKey === 'secret') {
     await localStorage.setItem('loggedIn', true);
-    dispatch(setLoggedIn(true));
+    await dispatch(setLoggedIn(true));
+    window.location.reload();
   }
 }
 

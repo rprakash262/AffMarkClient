@@ -80,7 +80,7 @@ class Admin extends Component {
               </div>
             </div>
             <div className="admin-main-area">
-              {selectedTab === 'addNewCategory' && <AddNewCategory allCategories={allCategories} /> }
+              {selectedTab === 'addNewCategory' && <AddNewCategory /> }
               {selectedTab === 'addNewSubCategory' && <AddNewSubCategory /> }
               {selectedTab === 'addNewItem' && <AddNewItemForm /> }
             </div>

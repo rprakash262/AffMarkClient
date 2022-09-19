@@ -79,7 +79,13 @@ class ItemsSlider extends React.Component {
 
   render() {
     const { left, containerWidth } = this.state;
-    const { items, oneItem } = this.props;
+    const {
+      items,
+      oneItem,
+      loggedIn,
+      editItem,
+      deleteItem,
+    } = this.props;
 
     return (
       <div className="items-slider">

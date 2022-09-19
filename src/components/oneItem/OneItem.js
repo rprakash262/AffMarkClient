@@ -10,6 +10,7 @@ const redirect = (id, link) => {
 }
 
 function OneItem({ item, loggedIn, editItem, deleteItem }) {
+  // console.log({loggedIn})
   return (
     <div className="home-page-one-item">
       {loggedIn && (
