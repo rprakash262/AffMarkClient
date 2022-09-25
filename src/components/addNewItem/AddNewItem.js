@@ -85,7 +85,10 @@ class AddNewItem extends Component {
       selectedImageInput,
       editingItemId,
       submitEditNewItem,
+      customerRating,
     } = this.props;
+
+    console.log({props: this.props})
 
     return (
       <div className="admin-add-new-item">
@@ -167,7 +170,10 @@ class AddNewItem extends Component {
             />
           </div>
           <div className="admin-one-form-item">
-            <RateSlider onChange={val => setCustomerRating(val)}/>
+            <RateSlider
+              onChange={val => setCustomerRating(val)}
+              rating={customerRating}
+            />
           </div>
           <div className="admin-one-form-item">
             <FormControlLabel
@@ -289,6 +295,7 @@ const mapState = state => {
     submitttingFlag,
     selectedImageInput,
     editingItemId,
+    customerRating,
   } = state.addNewItem;
 
   return {
@@ -308,6 +315,7 @@ const mapState = state => {
     submitttingFlag,
     selectedImageInput,
     editingItemId,
+    customerRating,
   }
 }
 

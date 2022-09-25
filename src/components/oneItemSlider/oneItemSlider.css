@@ -44,6 +44,7 @@
   width: calc(100% - 120px);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .one-item-slider-main-container {

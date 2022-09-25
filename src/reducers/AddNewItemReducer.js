@@ -242,7 +242,11 @@ const editItem = item => async (dispatch, getState) => {
     buyLink,
     itemImage,
     id,
+    customerRating,
+    platform,
   } = item;
+
+  console.log({item})
 
   const subcategoriesForCategory = subCategories.filter(subCat => subCat.categoryId === categoryId);
 
@@ -254,15 +258,17 @@ const editItem = item => async (dispatch, getState) => {
   dispatch(setItemPrice(itemPrice));
   dispatch(setItemDesc(itemDescription));
   dispatch(setItemBuyLink(buyLink));
-  dispatch(setImageUrls([itemImage]));
+  dispatch(setImageUrls(itemImage));
   dispatch(setEditingItemId(id));
+  dispatch(setCustomerRating(customerRating));
+  dispatch(selectPlatform(platform));
+  dispatch(setItemFeatured(isFeatured));
 
   dispatch(loadEditItemModal(false));
 }
 
 const submitEditNewItem = () => async (dispatch, getState) => {
   const {
-    newItemFormData,
     selectedCategoryId,
     selectedSubCategoryId,
     itemName,
@@ -271,7 +277,11 @@ const submitEditNewItem = () => async (dispatch, getState) => {
     buyLink,
     imageUrls,
     editingItemId,
+    customerRating,
+    platform,
   } = getState().addNewItem;
+
+  let newItemFormData = {};
 
   newItemFormData['categoryId'] = selectedCategoryId;
   newItemFormData['subCategoryId'] = selectedSubCategoryId;
@@ -280,6 +290,8 @@ const submitEditNewItem = () => async (dispatch, getState) => {
   newItemFormData['itemPrice'] = itemPrice;
   newItemFormData['buyLink'] = buyLink;
   newItemFormData['itemImage'] = imageUrls;
+  newItemFormData['customerRating'] = customerRating;
+  newItemFormData['platform'] = platform;
   newItemFormData['date'] = new Date();
 
   if (!selectedCategoryId ||
@@ -298,7 +310,6 @@ const submitEditNewItem = () => async (dispatch, getState) => {
   }
 
   console.log({editingItemId}, {newItemFormData});
-
   try {
     const response = await postEditItem(editingItemId, newItemFormData);
 
@@ -307,7 +318,7 @@ const submitEditNewItem = () => async (dispatch, getState) => {
     setTimeout(() => {
       dispatch(layoutActions.setAlert(false, 'success', 'Item added successfully!'));
       setTimeout(() => {
-        window.location.reload();        
+        // window.location.reload();        
       }, 1000);
     }, 4000);
   } catch (err) {

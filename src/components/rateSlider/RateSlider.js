@@ -66,7 +66,7 @@ function valuetext(value) {
 
 class RateSlider extends Component {
   render() {
-    const { onChange } = this.props
+    const { onChange, rating } = this.props
 
     return (
       <div>
@@ -80,6 +80,7 @@ class RateSlider extends Component {
           step={10}
           valueLabelDisplay="auto"
           marks={marks}
+          value={rating * 20}
           onChange={(e, newVal) => onChange(newVal / 20)}
         />
       </div>
