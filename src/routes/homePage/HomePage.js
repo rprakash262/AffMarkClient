@@ -11,6 +11,7 @@ import Scrollable from '../../components/scrollable';
 import ItemsSlider from '../../components/itemsSlider';
 import OneItemSlider from '../../components/oneItemSlider';
 import OneCarouselItem from '../../components/oneCarouselItem';
+import VideoPlayer from '../../components/videoPlayer';
 
 class HomePage extends Component {
   componentDidMount() {
@@ -33,6 +34,9 @@ class HomePage extends Component {
 
     return (
       <div>
+        <div>
+          {/*<VideoPlayer />*/}
+        </div>
         <OneItemSlider
           items={featuredItems}
           oneItem={item => <OneCarouselItem item={item} />}
@@ -51,30 +55,6 @@ class HomePage extends Component {
             </div>
           </div>
         )}
-        {/*{Object.entries(homePageContent).map(([key, val]) => (
-          <div className="home-page-item-panel">
-            <div className="home-page-item-panel-header">
-              <h4>{key}</h4>
-              <button onClick={() => this.redirectHandler(val[0].categoryId)}>
-                See All
-              </button>
-            </div>
-            <div style={{ width: '100%', height: '100%' }}>
-              <Scrollable scrollX>
-                <div className="home-page-item-panel-content">
-                    {val.map(item => (
-                      <OneItem
-                        item={item}
-                        loggedIn={loggedIn}
-                        editItem={editItem}
-                        deleteItem={deleteItem}
-                      />
-                    ))}
-                </div>
-              </Scrollable>
-              </div>
-          </div>
-        ))}*/}
         {Object.entries(homePageContent).map(([key, val]) => (
           <div className="home-page-item-panel" key={key}>
             <div className="home-page-item-panel-header">

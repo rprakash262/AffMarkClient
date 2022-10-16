@@ -73,26 +73,6 @@ class OneCategory extends Component {
           </div>
         )}
         <h3 style={{ textAlign: 'left', textTransform: 'capitalize' }}>{categoryName}</h3>
-        {/*{Object.entries(oneCategoryContent).map(([key, val]) => (
-          <div className="home-page-item-panel">
-            <div className="home-page-item-panel-header">
-              <h4>{key}</h4>
-              <button onClick={() => this.redirectHandler(val[0].subCategoryId)}>
-                See All
-              </button>
-            </div>
-            <div className="home-page-item-panel-content">
-              {val.map(item =>
-                <OneItem
-                  item={item}
-                  loggedIn={loggedIn}
-                  editItem={editItem}
-                  deleteItem={deleteItem}
-                />
-              )}
-            </div>
-          </div>
-        ))}*/}
         {Object.entries(oneCategoryContent).map(([key, val]) => (
           <div className="home-page-item-panel">
             <div className="home-page-item-panel-header">

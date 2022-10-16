@@ -38,14 +38,6 @@ class OneSubcategory extends Component {
         )}
         <h4></h4>
         <div className="home-page-item-panel-content">
-          {/*{oneSubCategoryContent.map(item =>
-            <OneItem
-              item={item}
-              loggedIn={loggedIn}
-              editItem={editItem}
-              deleteItem={deleteItem}
-            />
-          )}*/}
           <ItemsSlider
             items={oneSubCategoryContent}
             loggedIn={loggedIn}

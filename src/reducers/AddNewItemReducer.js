@@ -246,8 +246,6 @@ const editItem = item => async (dispatch, getState) => {
     platform,
   } = item;
 
-  console.log({item})
-
   const subcategoriesForCategory = subCategories.filter(subCat => subCat.categoryId === categoryId);
 
   dispatch(setSubcategoriesForCategory(subcategoriesForCategory));
@@ -309,7 +307,6 @@ const submitEditNewItem = () => async (dispatch, getState) => {
     }, 4000);
   }
 
-  console.log({editingItemId}, {newItemFormData});
   try {
     const response = await postEditItem(editingItemId, newItemFormData);
 
@@ -318,7 +315,7 @@ const submitEditNewItem = () => async (dispatch, getState) => {
     setTimeout(() => {
       dispatch(layoutActions.setAlert(false, 'success', 'Item added successfully!'));
       setTimeout(() => {
-        // window.location.reload();        
+        window.location.reload();        
       }, 1000);
     }, 4000);
   } catch (err) {
