@@ -22,20 +22,20 @@ function OneCarouselItem({ item }) {
       </div>
       <div className="carousel-item-desc">
         <h4>{item && item.itemName}</h4>
-        <div>
+        <div className="carousal-item-star-rating">
         {
           Array(5).fill().map((x, i) => {
-            if (item.customerRating > i - 1 && item.customerRating < i + 1) {
+            if (item.customerRating > i && item.customerRating < i + 1) {
               return <StarHalfIcon style={style} />
             } else if (item.customerRating < i + 1) {
               return <StarOutlineIcon style={style} />
-            } else if (item.customerRating > i + 1) {
+            } else if (item.customerRating >= i + 1) {
               return <StarIcon style={style} />
             }
           })
         }
         </div>
-        <p>Price: Rs. {item && item.itemPrice}</p>
+        <h5>Price: Rs. {item && item.itemPrice}</h5>
         <p>{item.itemDescription}</p>
       </div>
     </div>

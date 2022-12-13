@@ -35,7 +35,9 @@ class HomePage extends Component {
     return (
       <div>
         <div>
-          {/*<VideoPlayer />*/}
+          {/*
+            <VideoPlayer />
+          */}
         </div>
         <OneItemSlider
           items={featuredItems}

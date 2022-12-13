@@ -63,6 +63,10 @@
 
 .home-page-one-item-desc {
     padding: 25px 0 5px 0;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .home-page-one-item-desc > * {
@@ -71,6 +75,7 @@
 
 .home-page-one-item-desc > h4 {
     text-transform: capitalize;
+    text-align: center;
 }
 
 .home-page-one-item button {
