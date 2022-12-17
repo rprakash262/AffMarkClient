@@ -1,0 +1,10 @@
+.one-subcategory-grid {
+  width: 100%;
+  height: auto;
+}
+
+.one-subcategory-grid-item {
+  width: 250px;
+  float: left;
+  margin: 25px;
+}
