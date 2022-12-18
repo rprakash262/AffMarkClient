@@ -9,6 +9,14 @@ import OneItem from '../../components/oneItem';
 import ItemsSlider from '../../components/itemsSlider';
 
 class OneSubcategory extends Component {
+  constructor() {
+    super();
+    this.state = {
+      categoryName: '',
+      subCategoryName: '',
+    }
+  }
+
   componentDidMount() {
     const query = this.props.location.search;
     const id = query.slice(query.indexOf('=') + 1);
@@ -20,6 +28,33 @@ class OneSubcategory extends Component {
     window.location.href = `/category/subCategory/product?id=${productId}`;
   }
 
+  componentDidMount() {
+    const query = this.props.location.search;
+    const id = query.slice(query.indexOf('=') + 1);
+
+    this.props.init(id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const query = this.props.location.search;
+    const id = query.slice(query.indexOf('=') + 1);
+
+    if (nextProps && nextProps.catObj && nextProps.subCatObj) {  
+      const { catObj, subCatObj, subCategories } = this.props;
+      const subCategoryName = subCatObj[id];
+      let categoryName = '';
+
+      subCategories.forEach(e => {
+        if (e.id === id) {
+          const catId = e.categoryId;
+          categoryName = catObj[catId];
+        }
+      })
+      console.log({ subCategoryName, categoryName });
+      this.setState({ subCategoryName, categoryName })
+    }
+  }
+
   render() {
     const {
       oneSubCategoryContent,
@@ -27,18 +62,26 @@ class OneSubcategory extends Component {
       loggedIn,
       editItem,
       deleteItem,
+      catObj,
+      subCatObj,
+      subCategories
     } = this.props;
 
-    console.log({ oneSubCategoryContent })
+    const {
+      categoryName,
+      subCategoryName
+    } = this.state;
+
+    // console.log({props: this.props, oneSubCategoryContent, catObj, subCatObj, subCategories });
 
     return (
-      <div>
+      <div className="one-subcategory">
         {loadingData && (
           <div>
             <HourglassBottomIcon />
           </div>
         )}
-        <h4></h4>
+        <h3>{ categoryName } > { subCategoryName }</h3>
         <div className="home-page-item-panel-content">
           <div className="one-subcategory-grid">
             {oneSubCategoryContent.map((item) => (
@@ -74,10 +117,19 @@ const mapState = state => {
     loggedIn
   } = state.oneSubCategory;
 
+  const {
+    catObj,
+    subCatObj,
+    subCategories,
+  } = state.layout;
+
   return {
     oneSubCategoryContent,
     loadingData,
-    loggedIn
+    loggedIn,
+    catObj,
+    subCatObj,
+    subCategories,
   }
 };
 

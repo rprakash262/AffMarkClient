@@ -12,6 +12,7 @@ const CHANGE_SEARCH_TEXT = 'LayoutReducer/CHANGE_SEARCH_TEXT';
 const CHANGE_SEARCH_FLAG = 'LayoutReducer/CHANGE_SEARCH_FLAG';
 const SET_CAT_OBJ = 'LayoutReducer/SET_CAT_OBJ';
 const SET_SUB_CAT_OBJ = 'LayoutReducer/SET_SUB_CAT_OBJ';
+const SET_SUB_CATS = 'LayoutReducer/SET_SUB_CATS';
 const SET_LOGGED_IN = 'LayoutReducer/SET_LOGGED_IN';
 const SET_DIMENSIONS = 'LayoutReducer/SET_DIMENSIONS';
 
@@ -21,6 +22,7 @@ const toggleConfirmDeleteItemPrompt = bool => ({ type: TOGGLE_CONFIRM_DELETE_ITE
 const changeSearchText = val => ({ type: CHANGE_SEARCH_TEXT, val });
 const setCatObj = obj => ({ type: SET_CAT_OBJ, obj });
 const setSubCatObj = obj => ({ type: SET_SUB_CAT_OBJ, obj });
+const setSubcategories = obj => ({ type: SET_SUB_CATS, obj });
 const setLoggedIn = bool => ({ type: SET_LOGGED_IN, bool });
 const setDimensions = (width, height) => ({ type: SET_DIMENSIONS, width, height });
 
@@ -35,6 +37,7 @@ const defaultState = {
   searchFlag: false,
   catObj: {},
   subCatObj: {},
+  subCategories: [],
   loggedIn: false,
   innerWidth: 0,
   innerHeight: 0,
@@ -65,10 +68,10 @@ const init = () => async dispatch => {
       subCatObj[subCat.id] = subCat.subCategoryName;
     });
 
-
     dispatch(setNavbar(result));
     dispatch(setCatObj(catObj));
     dispatch(setSubCatObj(subCatObj));
+    dispatch(setSubcategories(subCategories));
     dispatch(setDimensions(window.innerWidth, window.innerHeight));
   } catch (err) {
     console.log(err);
@@ -132,6 +135,10 @@ function LayoutReducer(state = defaultState, action) {
     case SET_SUB_CAT_OBJ:
       return Object.assign({}, state, {
         subCatObj: action.obj
+      });
+    case SET_SUB_CATS:
+      return Object.assign({}, state, {
+        subCategories: action.obj
       });
     case SET_LOGGED_IN:
       return Object.assign({}, state, {

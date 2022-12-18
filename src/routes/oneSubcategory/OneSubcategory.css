@@ -8,3 +8,10 @@
   float: left;
   margin: 25px;
 }
+
+.one-subcategory h3 {
+  text-transform: capitalize;
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 70px;
+}

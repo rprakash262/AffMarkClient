@@ -29,15 +29,12 @@ class OneCategory extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log({nextProps});
     if (nextProps && nextProps.catObj) {
       const query = this.props.location.search;
       const id = query.slice(query.indexOf('=') + 1);
 
       const { catObj } = this.props;
-      console.log({catObj})
       const categoryName = nextProps.catObj[id];
-      console.log({ categoryName })
       this.setState({ categoryName })
     }
   }
