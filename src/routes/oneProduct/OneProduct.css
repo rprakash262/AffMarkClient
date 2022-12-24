@@ -100,6 +100,15 @@
   text-decoration: none;
 }
 
+.one-product-similar-products {
+  margin-top: 100px;
+}
+
+.one-product-similar-products h5 {
+  text-align: left;
+  font-size: 20px;
+}
+
 @media only screen and (max-width: 600px) {
   .one-product {
     padding-top: 30px;

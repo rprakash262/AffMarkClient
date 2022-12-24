@@ -16,6 +16,7 @@ import {
   fetchOneCategoryContent,
   fetchOneSubcategoryContent,
   fetchOneProduct,
+  fetchSimilarProducts,
   searchQuery,
 } from './mainActions';
 
@@ -37,5 +38,6 @@ export const mainActions = {
   fetchOneCategoryContent,
   fetchOneSubcategoryContent,
   fetchOneProduct,
+  fetchSimilarProducts,
   searchQuery,
 };

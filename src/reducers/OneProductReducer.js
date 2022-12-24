@@ -1,21 +1,27 @@
 import { mainActions } from '../actions';
 
-const { fetchOneProduct } = mainActions;
+const {
+  fetchOneProduct,
+  fetchSimilarProducts,
+} = mainActions;
 
 const SET_CONTENT = 'oneProduct/SET_CONTENT';
 const SET_LOADING_DATA  = 'oneProduct/SET_LOADING_DATA ';
 const SET_LOGGED_IN  = 'oneProduct/SET_LOGGED_IN ';
 const SET_SELECTED_IMG  = 'oneProduct/SET_SELECTED_IMG ';
+const SET_SIMILAR_PRODUCTS  = 'oneProduct/SET_SIMILAR_PRODUCTS ';
 
 const setLoggedIn = bool => ({ type: SET_LOGGED_IN, bool });
 const setOneProduct = product => ({ type: SET_CONTENT, product });
 const setLoadingData = bool => ({ type: SET_LOADING_DATA, bool });
+const setSimilarProducts = products => ({ type: SET_SIMILAR_PRODUCTS, products });
 const selectImg = img => ({ type: SET_SELECTED_IMG, img });
 
 const defaultState = {
   oneProduct: [],
   loadingData: false,
   selectedImg: '',
+  similarProducts: [],
 };
 
 const init = productId => async (dispatch, getState) => {
@@ -35,6 +41,12 @@ const init = productId => async (dispatch, getState) => {
     dispatch(setOneProduct(result));
     dispatch(selectImg(result.itemImage))
     dispatch(setLoadingData(false));
+
+    const subCategoryId = result.subCategoryId;
+    const response3 = await fetchSimilarProducts(subCategoryId, productId);
+
+    const { result: result2 } = response3;
+    dispatch(setSimilarProducts(result2));
   } catch (err) {
     console.error(err);
     dispatch(setLoadingData(false));
@@ -63,6 +75,10 @@ function OneProductReducer(state = defaultState, action) {
     case SET_SELECTED_IMG:
       return Object.assign({}, state, {
         selectedImg: action.img,
+      });
+    case SET_SIMILAR_PRODUCTS:
+      return Object.assign({}, state, {
+        similarProducts: action.products,
       });
     default:
       return state;

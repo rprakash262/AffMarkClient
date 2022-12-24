@@ -43,6 +43,17 @@ export const fetchOneProduct = async productId => {
   return data;
 }
 
+export const fetchSimilarProducts = async (subCategoryId, productId) => {
+  const response = await axios.post(`${apiRootTesting}/get-similar-products`, {
+    subCategoryId,
+    productId
+  });
+
+  const { data } = response;
+
+  return data;
+}
+
 export const searchQuery = async query => {
   const response = await axios.post(`${apiRootTesting}/search-query`, { query });
 
