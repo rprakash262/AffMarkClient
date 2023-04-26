@@ -38,8 +38,6 @@ class Navbar extends Component {
       innerHeight,
     } = this.props;
 
-    console.log({navbar})
-
     const { showingItemId } = this.state;
 
     return (
