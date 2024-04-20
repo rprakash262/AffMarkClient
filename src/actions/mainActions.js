@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const apiRootTesting = 'https://glacial-fortress-06174.herokuapp.com/main';
-const apiRootTesting = 'https://rprakash262-affmarkserver.onrender.com/main'
+const apiRootTesting = 'https://affmarkserver.onrender.com/main'
 // const apiRootTesting = 'http://localhost:5000/main';
 
 export const fetchHomePageContent = async () => {
