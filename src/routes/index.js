@@ -100,35 +100,35 @@ class App extends Component {
                 />
                 <Switch>
                   <Route
-                    exact
+                    // exact
                     path="/category"  
                     component={OneCategory}
                   />
                 </Switch>
                 <Switch>
                   <Route
-                    exact
+                    // exact
                     path="/category/subCategory"  
                     component={OneSubcategory}
                   />
                 </Switch>
                 <Switch>
                   <Route
-                    exact
+                    // exact
                     path="/category/subCategory/product"  
                     component={OneProduct}
                   />
                 </Switch>
                 <Switch>
                   <Route
-                    exact
+                    // exact
                     path="/search"  
                     component={SearchResult}
                   />
                 </Switch>
                 <Switch>
                   <Route
-                    exact
+                    // exact
                     path="/admin"  
                     component={Admin}
                   />
